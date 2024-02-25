@@ -1,0 +1,42 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "cwd": "${workspaceFolder}",
+    "tasks": [
+        {
+            "label": "pub get",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "pub",
+                "get"
+            ],
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "rust_codegen_build_web",
+            "command": "flutter_rust_bridge_codegen",
+            "args": [
+                "build-web"
+            ],
+        },
+        {
+            "label": "rust_codegen_generate",
+            "command": "flutter_rust_bridge_codegen",
+            "args": [
+                "generate"
+            ],
+        },
+        {
+            "label": "rust_codegen",
+            "dependsOn": [
+                "rust_codegen_generate",
+                "rust_codegen_build_web"
+            ],
+            "dependsOrder": "sequence",
+        }
+    ]
+}
