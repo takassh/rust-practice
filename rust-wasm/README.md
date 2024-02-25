@@ -4,6 +4,28 @@
 
 ## Memo
 
+### How to set up wasm project using rust?
+1. `cargo generate --git https://github.com/rustwasm/wasm-pack-template`
+1. `wasm-pack build`
+1. `npm init wasm-app www`
+1. `npm install` within `www`
+1. add wasm dependency with a key into `package.json` within www [package.json](./www/package.json)
+1. now you can import wasm using the key
+1. `npm install` within `www`
+1. `npm run start`
+
+Once you have done above setup, when you make changes your wasm you just run `wasm-pack build` to reflect the change 
+
+### How to test wasm?
+- `wasm-pack test --firefox --headless` (you need to install firefox in advance)
+
+### How to debug wasm or js?
+- you can use `log!` like `println!` style using `web_sys::console::log_1`
+- add `debugger;` in .js file to stop debugger
+
+### How to catch Panics?
+- add `utils::set_panic_hook();`
+
 ### Why you use rust with wasm, instead of JavaScript?
 - For Low-Level Control with High-Level Ergonomics. Comparing to JS, rust with wasm can have low-level control and reliable performance.
 - For small .wasm size
