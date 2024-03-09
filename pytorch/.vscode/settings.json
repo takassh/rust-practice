@@ -1,0 +1,11 @@
+{
+    "rust-analyzer.server.extraEnv": {
+        "LIBTORCH": "${workspaceFolder}/libtorch",
+    },
+    "rust-analyzer.runnables.extraEnv": {
+        "LIBTORCH": "${workspaceFolder}/libtorch",
+    },
+    "terminal.integrated.env.osx": {
+        "LIBTORCH": "${workspaceFolder}/libtorch",
+    }
+}
