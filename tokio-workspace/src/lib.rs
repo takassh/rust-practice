@@ -3,7 +3,7 @@ mod tests {
     use std::{sync::Arc, time::Duration};
 
     use tokio::{
-        sync::{broadcast, mpsc, watch, Mutex},
+        sync::{broadcast, mpsc, oneshot, watch, Mutex},
         time::sleep,
     };
 
@@ -129,6 +129,38 @@ mod tests {
         // each value is consumed by each worker but it can be skipped
         let _ = worker1.await;
         let _ = worker2.await;
+    }
+
+    #[tokio::test]
+    async fn oneshot() {
+        #[derive(Debug)]
+        struct Message {
+            message: String,
+            sender: oneshot::Sender<String>,
+        }
+
+        let (tx, mut rx) = mpsc::channel::<Message>(100);
+        let (sender, recv) = oneshot::channel();
+
+        tokio::spawn(async move {
+            let Some(result) = rx.recv().await else {
+                return;
+            };
+            println!("GOT = {:?}", result.message);
+            result
+                .sender
+                .send("I got your message".to_string())
+                .unwrap();
+        });
+
+        let _ = tx
+            .send(Message {
+                message: "Could you receive this message?".to_string(),
+                sender,
+            })
+            .await;
+
+        println!("{:?}", recv.await.unwrap())
     }
 }
 
