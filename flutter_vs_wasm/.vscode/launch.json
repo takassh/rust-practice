@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "web develop",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--web-port",
+                "3000",
+                "--web-header=Cross-Origin-Opener-Policy=same-origin",
+                "--web-header=Cross-Origin-Embedder-Policy=require-corp"
+            ],
+            "flutterMode": "debug"
+        },
+        {
+            "name": "web release",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--web-port",
+                "3000",
+                "--web-header=Cross-Origin-Opener-Policy=same-origin",
+                "--web-header=Cross-Origin-Embedder-Policy=require-corp"
+            ],
+            "flutterMode": "release"
+        },
+    ],
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    "dart.sdkPath": ".fvm/flutter_sdk/bin/dart"
+}
